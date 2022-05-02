@@ -17,7 +17,6 @@ class Booking():
         accept_button = self.driver.find_element_by_id("onetrust-accept-btn-handler")
         accept_button.click()
         
-
     def change_currency(self, currency=None):
         currency_element = self.driver.find_element_by_css_selector('button[data-tooltip-text="Choose your currency"]')
         currency_element.click()
@@ -26,6 +25,26 @@ class Booking():
             f'a[data-modal-header-async-url-param*="selected_currency={currency}"]'
         )
         selected_currency.click()
+
+    def destination(self, destination):
+        destination_field = self.driver.find_element_by_id("ss")
+        destination_field.clear()
+        destination_field.send_keys(destination)
+        first_element = self.driver.find_element_by_css_selector(
+            'li[data-i="0"]'
+        )
+        first_element.click()
+
+    def dates(self, date_check_in, date_check_out):
+        date_check_in = self.driver.find_element_by_css_selector(
+            f'td[data-date="{date_check_in}"]'
+        )
+        date_check_in.click()
+        date_check_out = self.driver.find_element_by_css_selector(
+            f'td[data-date="{date_check_out}"]'
+        )
+        date_check_out.click()
+
 
     def sleep(self):
         time.sleep(5)
