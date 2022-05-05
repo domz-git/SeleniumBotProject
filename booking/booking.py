@@ -45,6 +45,13 @@ class Booking():
         )
         date_check_out.click()
 
+    def adults(self, count):
+        select_adult = self.driver.find_element_by_id("xp__guests__toggle")
+        select_adult.click()
+
+        decrease_adults = self.driver.find_elements_by_css_selector
+
+
 
     def sleep(self):
         time.sleep(5)
