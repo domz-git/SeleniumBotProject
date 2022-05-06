@@ -2,8 +2,6 @@ from selenium import webdriver
 import time
 from booking.constants import *
 
-PATH = "C:\SeleniumDrivers\chromedriver.exe"
-
 class Booking():
     def __init__(self):
         self.driver = webdriver.Chrome(PATH)
@@ -49,7 +47,9 @@ class Booking():
         select_adult = self.driver.find_element_by_id("xp__guests__toggle")
         select_adult.click()
 
-        decrease_adults = self.driver.find_elements_by_css_selector
+        decrease_adults = self.driver.find_elements_by_css_selector(
+            'button[aria-label="Decrease number of Adults"]'
+        )
 
 
 
