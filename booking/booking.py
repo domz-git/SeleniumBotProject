@@ -1,6 +1,7 @@
 from selenium import webdriver
 import time
 from booking.constants import *
+from booking.filtration import Filtration
 
 class Booking():
     def __init__(self):
@@ -22,6 +23,7 @@ class Booking():
         selected_currency = self.driver.find_element_by_css_selector(
             f'a[data-modal-header-async-url-param*="selected_currency={currency}"]'
         )
+        self.driver.implicitly_wait(15)
         selected_currency.click()
 
     def destination(self, destination):
@@ -47,10 +49,29 @@ class Booking():
         select_adult = self.driver.find_element_by_id("xp__guests__toggle")
         select_adult.click()
 
-        decrease_adults = self.driver.find_elements_by_css_selector(
+        number_of_adults = self.driver.find_element_by_id("group_adults")
+        decrease_adults = self.driver.find_element_by_css_selector(
             'button[aria-label="Decrease number of Adults"]'
         )
+        increase_adults = self.driver.find_element_by_css_selector(
+            'button[aria-label="Increase number of Adults"]'
+        )
 
+        while(int(number_of_adults.get_attribute('value'))>1):
+            decrease_adults.click()
+        
+        while(int(number_of_adults.get_attribute('value'))<count):
+            increase_adults.click()
+
+    def search(self):
+        search_button = self.driver.find_element_by_css_selector(
+            'button[type="submit"]'
+        )
+        search_button.click()
+
+    def filtration(self):
+        filtration = Filtration()
+        filtration.star_rating(stars=5)
 
 
     def sleep(self):
