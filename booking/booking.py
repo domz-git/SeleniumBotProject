@@ -1,3 +1,4 @@
+from lib2to3.pgen2 import driver
 from selenium import webdriver
 import time
 from booking.constants import *
@@ -70,9 +71,10 @@ class Booking():
         search_button.click()
 
     def filtration(self):
-        filtration = Filtration()
-        filtration.star_rating(stars=5)
+        filtration = Filtration(driver=self.driver)
 
+        filtration.star_rating(2,3)
+        filtration.list_bookings()
+        filtration.sleep()
 
-    def sleep(self):
-        time.sleep(5)
+    
